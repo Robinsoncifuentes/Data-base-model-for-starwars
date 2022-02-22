@@ -7,7 +7,6 @@ from sqlalchemy import create_engine
 from eralchemy import render_er
 
 Base = declarative_base()
-
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
@@ -15,8 +14,9 @@ class User(Base):
     user_lastname = Column(String(250), nullable=False)
     email = Column(String(250), unique=True, nullable=False)
 
+
 class Character(Base):
-    __tablename__ = 'characters'
+    __tablename__ = 'character'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     lastname = Column(String(250), nullable=False)
@@ -27,14 +27,14 @@ class Character(Base):
 
 
 class Planet(Base):
-    __tablename__ = 'planets'
+    __tablename__ = 'planet'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     location = Column(String(250), nullable=False)
     population = Column(String(250), nullable=False)
 
 class Specie(Base):
-    __tablename__ = 'species'
+    __tablename__ = 'specie'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     location = Column(String(250), nullable=False)
@@ -42,7 +42,7 @@ class Specie(Base):
     lenguage = Column(String(250), nullable=False)
 
 class Starship(Base):
-    __tablename__ = 'starships'
+    __tablename__ = 'starship'
     id = Column(Integer, primary_key=True)
     name = Column(String(250), nullable=False)
     model = Column(String(250), nullable=False)
@@ -54,29 +54,29 @@ class FavoritsCharacter(Base):
     __tablename__ = 'favoritscharacters'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
-    characters_id = Column(Integer, ForeignKey('characters.id'))
+    characters_id = Column(Integer, ForeignKey('character.id'))
 
 
 class FavoritsPlanet(Base):
     __tablename__ = 'favoritsplanets'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
-    planets_id = Column(Integer, ForeignKey('planets.id'))
+    planets_id = Column(Integer, ForeignKey('planet.id'))
 
 
 class FavoritsStarship(Base):
     __tablename__ = 'favoritsStarships'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
-    starships_id = Column(Integer, ForeignKey('starships.id'))
+    starships_id = Column(Integer, ForeignKey('starship.id'))
 
 
 class FavoritsSpecie(Base):
     __tablename__ = 'favoritsSpecies'
     id = Column(Integer, primary_key=True)
     user_id = Column(Integer, ForeignKey('user.id'))
-    species_id = Column(Integer, ForeignKey('species.id'))
-
+    species_id = Column(Integer, ForeignKey('specie.id'))
+    
     def to_dict(self):
         return {}
 
